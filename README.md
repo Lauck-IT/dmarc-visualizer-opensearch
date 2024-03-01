@@ -1,4 +1,4 @@
-# dmarc-visualizer
+# DMARC visualizer using OpenSearch
 
 Analyse and visualize DMARC results using open-source tools.
 
