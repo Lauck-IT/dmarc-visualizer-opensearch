@@ -2,28 +2,37 @@ apiVersion: 1
 
 datasources:
 - name: 'dmarc-ag'
-  type: 'elasticsearch'
+  type: 'grafana-opensearch-datasource'
   access: 'proxy'
   orgId: 1
-  url: 'http://elasticsearch:9200'
-  database: '[dmarc_aggregate-]YYYY-MM-DD'
-  isDefault: true
+  url: 'https://opensearch:9200'
+  basicAuth: true
+  basicAuthUser: admin
   jsonData:
-    esVersion: 7.17.5
+    database: '[dmarc_aggregate-]YYYY-MM-DD'
+    flavor: 'opensearch'
+    interval: 'Daily'
     timeField: 'date_range'
-    interval: 'Daily'
+    tlsSkipVerify: true
+    version: '2.11.1'
+  secureJsonData:
+    basicAuthPassword: admin
   version: 1
-  editable: false
 - name: 'dmarc-fo'
-  type: 'elasticsearch'
+  type: 'grafana-opensearch-datasource'
   access: 'proxy'
   orgId: 1
-  url: 'http://elasticsearch:9200'
-  database: '[dmarc_forensic-]YYYY-MM-DD'
-  isDefault: false
+  url: 'https://opensearch:9200'
+  basicAuth: true
+  basicAuthUser: admin
   jsonData:
-    esVersion: 7.17.5
-    timeField: 'arrival_date'
+    database: '[dmarc_forensic-]YYYY-MM-DD'
+    flavor: 'opensearch'
     interval: 'Daily'
+    timeField: 'arrival_date'
+    tlsSkipVerify: true
+    version: '2.11.1'
+  secureJsonData:
+    basicAuthPassword: admin
   version: 1
-  editable: false
+

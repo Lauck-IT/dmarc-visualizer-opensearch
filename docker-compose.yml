@@ -7,21 +7,21 @@ services:
       - ./output_files:/output
     command: parsedmarc -c /parsedmarc.ini /input/* --debug
     depends_on:
-      - elasticsearch
+      - opensearch
     restart: on-failure
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.5
+  opensearch:
+    image: opensearchproject/opensearch:2.11.1
     environment:
       - discovery.type=single-node
     volumes:
-      - ./elastic_data:/usr/share/elasticsearch/data
+      - ./opensearch_data:/usr/share/opensearch/data
 
   grafana:
     build: ./grafana/
     ports:
-      - 3000:3000
+      - "3000:3000"
     user: root
     environment:
-      GF_INSTALL_PLUGINS: grafana-piechart-panel,grafana-worldmap-panel
+      GF_INSTALL_PLUGINS: grafana-piechart-panel,grafana-worldmap-panel,grafana-opensearch-datasource
       GF_AUTH_ANONYMOUS_ENABLED: 'true'

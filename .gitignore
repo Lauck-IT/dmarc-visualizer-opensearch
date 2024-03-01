@@ -1,5 +1,6 @@
+/archive/
 /files/
+/opensearch_data/
 /output_files/
 /parsedmarc/GeoLite2-Country*
-/elastic_data/
 parsedmarc.ini
